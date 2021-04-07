@@ -9,6 +9,7 @@ const Timer = ({ timerID, time, setTime, gameReset }) => {
       1000
     );
     return () => clearInterval(timerID.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameReset]);
   useEffect(() => {
     if (time === 0) {
@@ -26,7 +27,10 @@ const Timer = ({ timerID, time, setTime, gameReset }) => {
 };
 
 Timer.propTypes = {
-  initialTime: PropTypes.number,
+  timerID: PropTypes.object,
+  time: PropTypes.number,
+  setTime: PropTypes.func,
+  gameReset: PropTypes.bool,
 };
 
 export default Timer;

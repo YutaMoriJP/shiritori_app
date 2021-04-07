@@ -33,17 +33,21 @@ export default function AlertDialog({ open, setOpen }) {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             1) Two Players take turns to play and the first player chooses a
-            word of their liking.
+            word of their liking that doesn't end with <strong>N</strong>.
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
             2) The following player must choose a word that starts with the last
-            character from the preceding player. For example, if player A's word
-            is <strong>Amazing</strong> then player B must find a word that
-            starts with <strong>`G`</strong>.
+            character from the previous word. For example, if player A's word is{" "}
+            <strong>Amazing</strong> then player B must find a word that starts
+            with <strong>G</strong>.
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
             3) The word also must be a standalone word, so you are not allowed
-            use a sentence.
+            to use a sentence.
+          </DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            4) Finally, players must come up with the rule-abiding word within{" "}
+            <strong>30 seconds</strong>.
           </DialogContentText>
         </DialogContent>
         <DialogActions>

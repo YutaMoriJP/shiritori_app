@@ -1,9 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import HelpIcon from "@material-ui/icons/Help";
 import PlayerTurnStyled from "../styled/PlayerTurnStyled";
-import IconButton from "@material-ui/core/IconButton";
-import AlertDialog from "./Dialog";
 import Timer from "./Timer";
 
 const PlayerTurn = ({
@@ -14,9 +11,6 @@ const PlayerTurn = ({
   gameReset,
   gameOver,
 }) => {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  console.log(gameOver);
   return (
     <>
       <PlayerTurnStyled>
@@ -31,12 +25,7 @@ const PlayerTurn = ({
             />
           </article>
         )}
-
-        <IconButton onClick={handleOpen}>
-          <HelpIcon />
-        </IconButton>
       </PlayerTurnStyled>{" "}
-      <AlertDialog open={open} setOpen={setOpen} />
     </>
   );
 };

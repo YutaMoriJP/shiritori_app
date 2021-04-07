@@ -14,7 +14,7 @@ const Status = ({
     <>
       {gameOver || time === 0 ? (
         <>
-          {gameOver ? (
+          {gameOver && time !== 0 ? (
             <>
               <h1>Word that ends with "N" was chosen. Game Over</h1>
               <p>

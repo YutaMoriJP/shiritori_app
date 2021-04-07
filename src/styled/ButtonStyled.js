@@ -8,9 +8,9 @@ const ButtonStyled = styled(Button)`
 export const ButtonNormal = styled.button`
   background-color: #5f3dc4;
   color: white;
-  padding: 10px 20px;
+  padding: 5px 20px;
   font-size: 1.2rem;
-  border: 5px solid #5f3dc4;
+  border: 2px solid #5f3dc4;
   cursor: pointer;
   border-radius: 5px;
   &:hover {

@@ -77,6 +77,14 @@ const PlayerField = ({
 
 PlayerField.propTypes = {
   player: PropTypes.string,
+  active: PropTypes.object,
+  handleActive: PropTypes.func,
+  setCurrentWord: PropTypes.func,
+  setInvalid: PropTypes.func,
+  currentWord: PropTypes.string,
+  setGameOver: PropTypes.func,
+  setTime: PropTypes.func,
+  isGameOver: PropTypes.bool,
 };
 
 export default PlayerField;

@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import GlobalStyle from "./GlobalStyle";
 import Container from "@material-ui/core/Container";
 import Game from "./components/Players";
-import { validateWord } from "./customHooks/useFetch";
+import IconButton from "@material-ui/core/IconButton";
+import HelpIcon from "@material-ui/icons/Help";
+import AlertDialog from "./components/Dialog";
 
 const App = () => {
-  validateWord("event").then(v => console.log(v));
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
   return (
     <>
       <GlobalStyle />
+      <IconButton onClick={handleOpen}>
+        <HelpIcon />
+      </IconButton>
       <Container>
         <Game />
       </Container>
+      <AlertDialog open={open} setOpen={setOpen} />
     </>
   );
 };
 
 export default App;
+/*
+  <IconButton onClick={handleOpen}>
+          <HelpIcon />
+        </IconButton>
+        */
