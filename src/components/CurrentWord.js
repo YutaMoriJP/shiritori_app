@@ -1,6 +1,6 @@
 import React from "react";
 
-const CurrentWord = ({ currentWord, invalid }) => {
+const CurrentWord = ({ currentWord = "", invalid, resetGame }) => {
   const text = currentWord => {
     return invalid.invalid ? (
       <p style={{ color: invalid.invalid && "#fa5252" }}>{invalid.msg}</p>

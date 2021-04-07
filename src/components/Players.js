@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import PlayerField from "./PlayerField";
 import PlayersStyled from "../styled/PlayersStyled";
 import PlayerTurn from "./PlayerTurn";
-import CurrentWord from "./CurrentWord";
-import Button from "@material-ui/core/Button";
+import Status from "./Status";
 
 const Players = () => {
   const [active, setActive] = useState({ primary: false, secondary: true });
   const [invalid, setInvalid] = useState({ invalid: false, msg: "" });
+
+  //timer stuff
+  const timerID = useRef(null);
+  const [time, setTime] = useState(30);
+
   const [currentWord, setCurrentWord] = useState("");
   const [gameOver, setGameOver] = useState(false);
+  const [gameReset, setGameReset] = useState(false);
   const handleActive = () => {
     const { primary, secondary } = active;
     setActive({ primary: !primary, secondary: !secondary });
@@ -17,20 +22,55 @@ const Players = () => {
   const resetGame = () => {
     setGameOver(false);
     setCurrentWord("");
+    setTime(30);
+    setGameReset(prevBool => !prevBool);
   };
+  useEffect(() => {
+    if (time === 0) {
+      setGameOver(true);
+    }
+  }, [time]);
   return (
     <>
-      <PlayerTurn active={active} />
-      {gameOver ? (
-        <>
-          <h1>Word that ends with "N" was chosen. Game Over</h1>
-          <Button onClick={resetGame}>Reset Game</Button>
-        </>
-      ) : (
-        <CurrentWord currentWord={currentWord} invalid={invalid} />
-      )}
+      <PlayerTurn
+        active={active}
+        time={time}
+        setTime={setTime}
+        timerID={timerID}
+        gameOver={gameOver}
+        gameReset={gameReset}
+      />
+      <Status
+        gameOver={gameOver}
+        resetGame={resetGame}
+        currentWord={currentWord}
+        invalid={invalid}
+        time={time}
+        active={active}
+      />
       <PlayersStyled>
-        <PlayerField
+        {["primary", "secondary"].map(player => (
+          <PlayerField
+            key={player}
+            player={player}
+            active={active}
+            handleActive={handleActive}
+            setCurrentWord={setCurrentWord}
+            setInvalid={setInvalid}
+            currentWord={currentWord}
+            setGameOver={setGameOver}
+            setTime={setTime}
+            isGameOver={gameOver}
+          />
+        ))}
+      </PlayersStyled>
+    </>
+  );
+};
+
+export default Players;
+/*
+ <PlayerField
           player="primary"
           active={active}
           handleActive={handleActive}
@@ -38,6 +78,7 @@ const Players = () => {
           setInvalid={setInvalid}
           currentWord={currentWord}
           setGameOver={setGameOver}
+          setTime={setTime}
         />
         <PlayerField
           player="secondary"
@@ -47,10 +88,6 @@ const Players = () => {
           setInvalid={setInvalid}
           currentWord={currentWord}
           setGameOver={setGameOver}
+          setTime={setTime}
         />
-      </PlayersStyled>
-    </>
-  );
-};
-
-export default Players;
+        */

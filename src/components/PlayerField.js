@@ -10,6 +10,7 @@ import {
   gameOver,
 } from "../util/authenticateWord";
 import { validateWord } from "../customHooks/useFetch";
+import SubmitWrapper from "./SubmitWrapper";
 
 const PlayerField = ({
   player,
@@ -19,9 +20,10 @@ const PlayerField = ({
   setInvalid,
   currentWord,
   setGameOver,
+  setTime,
+  isGameOver,
 }) => {
   const [value, reset] = useInput("");
-  //const { error } = useFetch(value.value);
   const handleClick = async () => {
     const { value: word } = value;
     const autenticate = authenticateWord(word, currentWord);
@@ -50,23 +52,24 @@ const PlayerField = ({
     reset();
     handleActive();
     setCurrentWord(word);
+    setTime(30);
   };
   return (
     <>
       <PlayerFieldContainer>
         <h1>Player {player === "primary" ? 1 : 2}</h1>
-        <article>
-          <Text value={value} disabled={active[player]} />
+        <SubmitWrapper onClick={handleClick}>
+          <Text value={value} disabled={active[player] || isGameOver} />
           <ButtonStyled
             aria-label="Submit"
             variant="contained"
             color={player}
             onClick={handleClick}
-            disabled={active[player]}
+            disabled={active[player] || isGameOver}
           >
             Submit
           </ButtonStyled>
-        </article>
+        </SubmitWrapper>
       </PlayerFieldContainer>
     </>
   );

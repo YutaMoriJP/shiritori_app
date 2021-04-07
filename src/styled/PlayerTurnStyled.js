@@ -4,8 +4,11 @@ const PlayerTurnStyled = styled.article`
   display: flex;
   justify-content: center;
   gap: 10px;
-  h1 {
+  article {
     flex: 1 1 auto;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
   }
   svg {
     align-self: center;
