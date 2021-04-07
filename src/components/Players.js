@@ -14,9 +14,12 @@ const Players = () => {
   const [time, setTime] = useState(30);
 
   const [currentWord, setCurrentWord] = useState("");
-  const [gameOver, setGameOver] = useState(false);
+  const [gameOver, setGameOver] = useState(true);
   const [gameReset, setGameReset] = useState(false);
-  const handleGameStart = () => setFirstGame(false);
+  const handleGameStart = () => {
+    setGameOver(false);
+    setFirstGame(false);
+  };
   const handleActive = () => {
     const { primary, secondary } = active;
     setActive({ primary: !primary, secondary: !secondary });
