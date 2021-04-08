@@ -10,7 +10,6 @@ export default function AlertDialog({ open, setOpen }) {
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <div>
       <Dialog
@@ -25,8 +24,8 @@ export default function AlertDialog({ open, setOpen }) {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Shiritori is a Japanese word game in which the starting player picks
-            a word of their choosing and the competing player must pick a word
-            that begins with the ending character from the preceding player.
+            a word of their choosing and the competing player picks a word that
+            begins with the ending character from the preceding player.
           </DialogContentText>
         </DialogContent>
         <DialogTitle id="alert-dialog-title">{"Learn the Rules"}</DialogTitle>
@@ -39,11 +38,12 @@ export default function AlertDialog({ open, setOpen }) {
             2) The following player must choose a word that starts with the last
             character from the previous word. For example, if player A's word is{" "}
             <strong>Amazing</strong> then player B must find a word that starts
-            with <strong>G</strong>.
+            with <strong>G</strong>, like <strong>Gender</strong>.
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
             3) The word also must be a standalone word, so you are not allowed
-            to use a sentence.
+            to use multiple words. So <strong>Elephant</strong>is valid but{" "}
+            <strong>An Elephant</strong> is invalid.
           </DialogContentText>
           <DialogContentText id="alert-dialog-description">
             4) Finally, players must come up with the rule-abiding word within{" "}
