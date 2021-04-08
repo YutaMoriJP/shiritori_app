@@ -59,7 +59,15 @@ const PlayerField = ({
       <PlayerFieldContainer>
         <h1>Player {player === "primary" ? 1 : 2}</h1>
         <SubmitWrapper onClick={handleClick}>
-          <Text value={value} disabled={active[player] || isGameOver} />
+          <Text
+            value={value}
+            disabled={active[player] || isGameOver}
+            id={
+              player === "primary"
+                ? "player 1 input field"
+                : "player 2 input field"
+            }
+          />
           <ButtonStyled
             aria-label="Submit"
             variant="contained"

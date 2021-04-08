@@ -7,6 +7,7 @@ const Text = ({
   label = "Start typing",
   value,
   disabled = false,
+  id,
 }) => {
   return (
     <TextStyled
@@ -15,6 +16,7 @@ const Text = ({
       label={label}
       disabled={disabled}
       variant="outlined"
+      id={id}
     />
   );
 };
