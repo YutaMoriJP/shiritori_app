@@ -1,9 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import PlayerField from "./PlayerField";
+import React, { useState, useRef, useEffect, Suspense, lazy } from "react";
+//import PlayerField from "./PlayerField";
 import PlayersStyled from "../styled/PlayersStyled";
 import PlayerTurn from "./PlayerTurn";
 import Status from "./Status";
 import { ButtonNormal } from "../styled/ButtonStyled";
+
+const PlayerField = lazy(() => import("./PlayerField"));
 
 const Players = () => {
   const [active, setActive] = useState({ primary: false, secondary: true });
@@ -41,39 +43,45 @@ const Players = () => {
         <ButtonNormal onClick={handleGameStart}>Start Game</ButtonNormal>
       ) : (
         <>
-          <PlayerTurn
-            active={active}
-            time={time}
-            setTime={setTime}
-            timerID={timerID}
-            gameOver={gameOver}
-            gameReset={gameReset}
-          />
-          <Status
-            gameOver={gameOver}
-            resetGame={resetGame}
-            currentWord={currentWord}
-            invalid={invalid}
-            time={time}
-            active={active}
-          />
+          <Suspense>
+            <PlayerTurn
+              active={active}
+              time={time}
+              setTime={setTime}
+              timerID={timerID}
+              gameOver={gameOver}
+              gameReset={gameReset}
+            />
+          </Suspense>
+          <Suspense>
+            <Status
+              gameOver={gameOver}
+              resetGame={resetGame}
+              currentWord={currentWord}
+              invalid={invalid}
+              time={time}
+              active={active}
+            />
+          </Suspense>
         </>
       )}
       <PlayersStyled>
-        {["primary", "secondary"].map(player => (
-          <PlayerField
-            key={player}
-            player={player}
-            active={active}
-            handleActive={handleActive}
-            setCurrentWord={setCurrentWord}
-            setInvalid={setInvalid}
-            currentWord={currentWord}
-            setGameOver={setGameOver}
-            setTime={setTime}
-            isGameOver={gameOver}
-          />
-        ))}
+        <Suspense fallback={<div>loading content...</div>}>
+          {["primary", "secondary"].map(player => (
+            <PlayerField
+              key={player}
+              player={player}
+              active={active}
+              handleActive={handleActive}
+              setCurrentWord={setCurrentWord}
+              setInvalid={setInvalid}
+              currentWord={currentWord}
+              setGameOver={setGameOver}
+              setTime={setTime}
+              isGameOver={gameOver}
+            />
+          ))}
+        </Suspense>
       </PlayersStyled>
     </>
   );
